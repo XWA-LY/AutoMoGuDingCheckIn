@@ -1,0 +1,38 @@
+name: "打卡"
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 1 * * *"  # 每天UTC时间1:00（北京时间9:00）执行
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.8'
+        
+    - name: Install depend
+      run: |
+        pip install certifi
+        pip install cffi
+        pip install charset-normalizer
+        pip install cryptography
+        pip install idna
+        pip install numpy
+        pip install opencv-python
+        pip install pycparser
+        pip install requests
+        pip install urllib3
+        pip install aes-pkcs5
+        pip install Pillow
+        pip install opencv-python-headless
+
+    - name: Start sign
+      env:
+        USER: ${{ secrets.USER }}
+      run: |
+        python main.py
