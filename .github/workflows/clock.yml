@@ -17,7 +17,17 @@ jobs:
         
     - name: Install depend
       run: |
-        pip install -r requirements.txt
+        pip install aes-pkcs5
+        pip install requests
+        pip install certifi
+        pip install cffi
+        pip install charset-normalizer
+        pip install cryptography
+        pip install idna
+        pip install urllib3
+        pip install Pillow
+        pip install numpy
+        pip install opencv-python-headless
 
     - name: Start sign
       env:
