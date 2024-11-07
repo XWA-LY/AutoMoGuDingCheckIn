@@ -1,24 +1,19 @@
 {
   "config": {
     "user": {
-      "phone": "工学云手机号",
-      "password": "工学云密码"
+      "phone": "17671365092",
+      "password": "Wsj.176~0104%"
     },
     "clockIn": {
       "location": {
-        "address": "四川省 · 成都市 · 高新区 · 在科创十一街附近",
-        "latitude": "34.059922",
-        "longitude": "118.277435",
-        "province": "四川省",
-        "city": "成都市",
-        "area": "高新区"
+        "address": "湖北省 · 武汉市 · 江岸区 · 在绿地汉口中心写字楼附近",
+        "latitude": "30.656311",
+        "longitude": "114.291829",
+        "province": "湖北省",
+        "city": "武汉市",
+        "area": "江岸区"
       },
-      "imageCount": 0,
-      "description": [
-        "今天天气不错",
-        "今天天气很好",
-        "今天天气不太好"
-      ]
+      "imageCount": 0
     },
     "reportSettings": {
       "daily": {
@@ -28,7 +23,7 @@
       "weekly": {
         "enabled": true,
         "imageCount": 0,
-        "submitTime": 4
+        "submitTime": 7
       },
       "monthly": {
         "enabled": false,
@@ -50,7 +45,7 @@
       {
         "type": "PushPlus",
         "enabled": true,
-        "token": "your_token"
+        "token": "99e79ee5ef1e4504b7de453563205206"
       },
       {
         "type": "AnPush",
@@ -62,7 +57,7 @@
       {
         "type": "WxPusher",
         "enabled": true,
-        "spt": "your_spt"
+        "spt": "AT_fjR4R8QqMC9hyPPfBSVOC43TFz9jbajW"
       },
       {
         "type": "SMTP",
