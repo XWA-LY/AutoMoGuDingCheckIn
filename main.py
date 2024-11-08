@@ -81,7 +81,7 @@ def perform_clock_in(api_client: ApiClient, config: ConfigManager) -> Dict[str, 
     :return: 执行结果
     :rtype: Dict[str, Any]
     """
-    try:
+        try:
         current_time = datetime.now()
         current_hour = current_time.hour
 
