@@ -81,7 +81,25 @@ def perform_clock_in(api_client: ApiClient, config: ConfigManager) -> Dict[str, 
     :return: 执行结果
     :rtype: Dict[str, Any]
     """
-        try:
+    # try:
+    #     current_time = datetime.now()
+    #     current_hour = current_time.hour
+    #
+    #     # 判断打卡类型
+    #     if 8 <= current_hour < 12:
+    #         checkin_type = 'START'
+    #         display_type = '上班'
+    #     elif 17 <= current_hour < 20:
+    #         checkin_type = 'END'
+    #         display_type = '下班'
+    #     else:
+    #         logger.info("当前不在打卡时间范围内")
+    #         return {
+    #             "status": "skip",
+    #             "message": "当前不在打卡时间范围内",
+    #             "task_type": "打卡"
+    #         }
+    try:
         current_time = datetime.now()
         current_hour = current_time.hour
 
@@ -116,17 +134,13 @@ def perform_clock_in(api_client: ApiClient, config: ConfigManager) -> Dict[str, 
         user_name = config.get_value('userInfo.nikeName')
         logger.info(f'用户 {user_name} 开始 {display_type} 打卡')
 
-        # 打卡图片和备注
         attachments = upload_img(api_client, config, config.get_value("config.clockIn.imageCount"))
-        description = random.choice(config.get_value('config.clockIn.description')) if config.get_value(
-            'config.clockIn.description') else None
 
         # 设置打卡信息
         checkin_info = {
             'type': checkin_type,
             'lastDetailAddress': last_checkin_info.get('address'),
-            'attachments': attachments or None,
-            'description': description
+            'attachments': attachments or None
         }
 
         api_client.submit_clock_in(checkin_info)
