@@ -7,7 +7,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.header import Header
 from email.utils import formataddr
-
+from typing import Dict, Any
 import requests
 
 
@@ -67,11 +67,11 @@ class MessagePusher:
                 except Exception as e:
                     self._logger.error(f"{service_type} 消息推送失败: {str(e)}")
 
-    def _server_push(self, config: dict[str, Any], title: str, content: str):
+    def _server_push(self, config: Dict[str, Any], title: str, content: str):
         """Server酱 推送
 
         :param config: 配置
-        :type config: dict[str, Any]
+        :type config: Dict[str, Any]
         :param title: 标题
         :type title: str
         :param content: 内容
@@ -84,15 +84,19 @@ class MessagePusher:
         }
 
         try:
-            rsp = requests.post(url, data=data).json()
+            response = requests.post(url, data=data)
+            response.raise_for_status()  # 检查请求是否成功
+            rsp = response.json()
             if rsp.get("code") == 0:
                 self._logger.info("Server酱推送成功")
             else:
                 raise Exception(rsp.get("message"))
+        except requests.RequestException as e:
+            self._logger.error(f"Server酱推送失败: {str(e)}")
         except Exception as e:
             self._logger.error(f"Server酱推送失败: {str(e)}")
 
-    def _pushplus_push(self, config: dict[str, Any], title: str, content: str):
+    def _pushplus_push(self, config: Dict[str, Any], title: str, content: str):
         """PushPlus 推送
 
         :param config: 配置
@@ -117,7 +121,7 @@ class MessagePusher:
         except Exception as e:
             self._logger.error(f"PushPlus推送失败: {str(e)}")
 
-    def _anpush_push(self, config: dict[str, Any], title: str, content: str):
+    def _anpush_push(self, config: Dict[str, Any], title: str, content: str):
         """AnPush 推送
 
         :param config: 配置
@@ -144,7 +148,7 @@ class MessagePusher:
         except Exception as e:
             self._logger.error(f"AnPush推送失败: {str(e)}")
 
-    def _wxpusher_push(self, config: dict[str, Any], title: str, content: str):
+    def _wxpusher_push(self, config: Dict[str, Any], title: str, content: str):
         """WxPusher 推送
 
         :param config: 配置
@@ -171,7 +175,7 @@ class MessagePusher:
         except Exception as e:
             self._logger.error(f"WxPusher推送失败: {str(e)}")
 
-    def _smtp_push(self, config: dict[str, Any], title: str, content: str):
+    def _smtp_push(self, config: Dict[str, Any], title: str, content: str):
         """SMTP 邮件推送
 
         :param config: 配置
